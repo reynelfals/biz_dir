@@ -7,9 +7,11 @@ def main():
 
     help_handler = CommandHandler('help', help)
     show_handler = CommandHandler('show', show)
+    code_handler = CommandHandler('code', code)
 
     dispatcher.add_handler(help_handler)
     dispatcher.add_handler(show_handler)
+    dispatcher.add_handler(code_handler)
     
     conv_handler_add = ConversationHandler(
         entry_points=[CommandHandler('start', start), CommandHandler('add',add)],

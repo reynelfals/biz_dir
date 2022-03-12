@@ -13,12 +13,14 @@ from pymongo import MongoClient
 
 STATS, ADD, NAME, DESCRIPTION, CONTACT, PHONE, ADDRESS, EMAIL, DONE, CHOICE = range(10)
 command_keyboard = [
-    [KeyboardButton('/show'), KeyboardButton('/add'),  KeyboardButton('/help')]
+    [KeyboardButton('/show'), KeyboardButton('/add')], 
+    [ KeyboardButton('/help'),   KeyboardButton('/code')]
     ]
 markup = ReplyKeyboardMarkup(command_keyboard, one_time_keyboard=True, selective=True)
 
 message_keyboard = [
-    [KeyboardButton('/show'), KeyboardButton('/add'),  KeyboardButton('/help')]
+    [KeyboardButton('/show'), KeyboardButton('/add')],  
+    [KeyboardButton('/help'),  KeyboardButton('/code')]
     ]
 markup_msg = ReplyKeyboardMarkup(message_keyboard, one_time_keyboard=True, selective=True)
 business = None
@@ -72,6 +74,9 @@ def help(update, context):
                               parse_mode="MarkdownV2",
                               reply_markup=markup)
     return STATS
+
+def code(update, context):
+    update.message.reply_text(text='https://github.com/reynelfals/biz_dir')
 
 def show(update, context):
     logging.info(f'User {update.message.chat.first_name}, id {update.message.chat.id}, calling SHOW command')
