@@ -28,7 +28,7 @@ client = MongoClient()
 db = client.business
 
 def start(update, context):
-    logging.info(f'User {update.message.chat.first_name}, id {update.message.chat.id}, calling start command')
+    logging.info(f'User {update.message.chat.first_name}, id {update.message.chat.id}, calling START command')
     update.message.reply_text(text='**Welcome to the Biz Dir Bot**\n'
                                    'I can help you to advertise your business and also search a business that you need\.\n\n'
                                     
@@ -47,7 +47,7 @@ def start(update, context):
 
 def done(update, context):
 
-    logging.info(f'User {update.message.chat.first_name}, id {update.message.chat.id}, calling done command')
+    logging.info(f'User {update.message.chat.first_name}, id {update.message.chat.id}, calling DONE command')
     
     if 'business' in context.user_data:
         del context.user_data['business']
@@ -62,7 +62,7 @@ def done(update, context):
     return ConversationHandler.END
 
 def help(update, context):
-    logging.info(f'User {update.message.chat.first_name}, id {update.message.chat.id}, calling help command')
+    logging.info(f'User {update.message.chat.first_name}, id {update.message.chat.id}, calling HELP command')
     update.message.reply_text(text='**Welcome to the Biz Dir Bot**\n'
                                    'I can help you to advertise your business and also search a business that you need\.\n\n'
                                    
@@ -80,6 +80,7 @@ def help(update, context):
     return STATS
 
 def code(update, context):
+    logging.info(f'User {update.message.chat.first_name}, id {update.message.chat.id}, calling CODE command')
     update.message.reply_text(text='https://github.com/reynelfals/biz_dir')
 
 def show(update, context):
@@ -100,27 +101,27 @@ def show(update, context):
     return ADD
 
 def add(update, context):
-    logging.info(f'User {update.message.chat.first_name}, id {update.message.chat.id}, calling SHOWALL command')
+    logging.info(f'User {update.message.chat.first_name}, id {update.message.chat.id}, calling ADD command')
     context.user_data["business"]= {'user_id': update.message.chat.id, 'user': update.message.chat.first_name}
     update.message.reply_text(text="Please enter the Name of the business. /done to Abort")
     return NAME
 
 def name(update, context):
-    logging.info(f'User {update.message.chat.first_name}, id {update.message.chat.id}, calling name company command')
+    logging.info(f'User {update.message.chat.first_name}, id {update.message.chat.id}, calling NAME message')
     name_company = update.message.text.strip()
     context.user_data["business"]['name'] = name_company
     update.message.reply_text(text="Please enter the Description of the business. /done to Abort")
     return DESCRIPTION
 
 def description(update, context):
-    logging.info(f'User {update.message.chat.first_name}, id {update.message.chat.id}, calling SHOWALL command')
+    logging.info(f'User {update.message.chat.first_name}, id {update.message.chat.id}, calling DESCRIPTION message')
     company_desc = update.message.text.strip()
     context.user_data["business"]['description'] = company_desc
     update.message.reply_text(text="Please enter the contacts of the business (phone, web, address, etc.). /skip to skip.")
     return CONTACT
 
 def contact(update, context):
-    logging.info(f'User {update.message.chat.first_name}, id {update.message.chat.id}, calling phone command')
+    logging.info(f'User {update.message.chat.first_name}, id {update.message.chat.id}, calling CONTACT message')
     context.user_data["business"]['contact'] = update.message.text.strip()
     update.message.reply_text(text="Your business:")
     update.message.reply_text(text=f"Business: {context.user_data['business']['name']}")
@@ -142,7 +143,7 @@ def physical_address(update, context):
     return CHOICE
     
 def choice(update, context):
-    logging.info(f'User {update.message.chat.first_name}, id {update.message.chat.id}, calling SHOWALL command')
+    logging.info(f'User {update.message.chat.first_name}, id {update.message.chat.id}, calling CHOICE message')
     save_or_not = update.message.text.strip()
     biz = context.user_data["business"]
     if save_or_not == 'Yes':
@@ -155,7 +156,7 @@ def choice(update, context):
 def skip_contact(update: Update, context: CallbackContext) -> int:
     """Skips the phone and asks for email."""
     user = update.message.from_user
-    logging.info("User %s did not send a location.", user.first_name)
+    logging.info("User %s did not send a CONTACT.", user.first_name)
     context.user_data['business']['contact']=''
     update.message.reply_text(text="Your business:")
     update.message.reply_text(text=f"Business: {context.user_data['business']['name']}")
