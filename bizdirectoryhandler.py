@@ -29,15 +29,18 @@ db = client.business
 
 def start(update, context):
     logging.info(f'User {update.message.chat.first_name}, id {update.message.chat.id}, calling start command')
-    update.message.reply_text(text='**Welcome Partner**\n'
-                                   'I can help you to track your performance in the Decent Farm guild\n\n'
-                                   
+    update.message.reply_text(text='**Welcome to the Biz Dir Bot**\n'
+                                   'I can help you to advertise your business and also search a business that you need\.\n\n'
+                                    
                                    'Here, the list of commands:\n\n'
                                    
-                                   '`/stats`     \- To get all your stats\.\n\n'
+                                   '`/add`     \- To get add a business\.\n\n'
+
+                                   '`/show [query]`     \- Search a matching query\.\n\n'
                                    
+                                   '`/code`     \- To get the source code\.\n\n'
                                     
-                                    '`/help` \- Helpful to see the list of commands\.',
+                                    '`/help`    \- Helpful to see the list of commands\.',
                               parse_mode="MarkdownV2",
                               reply_markup=markup)
     return ADD
@@ -60,8 +63,8 @@ def done(update, context):
 
 def help(update, context):
     logging.info(f'User {update.message.chat.first_name}, id {update.message.chat.id}, calling help command')
-    update.message.reply_text(text='**Welcome Partner**\n'
-                                   'I can help you to track your performance in the Decent Farm guild\n\n'
+    update.message.reply_text(text='**Welcome to the Biz Dir Bot**\n'
+                                   'I can help you to advertise your business and also search a business that you need\.\n\n'
                                    
                                    'Here, the list of commands:\n\n'
                                    
@@ -69,8 +72,9 @@ def help(update, context):
 
                                    '`/show [query]`     \- Search a matching query\.\n\n'
                                    
+                                   '`/code`     \- To get the source code\.\n\n'
                                     
-                                    '`/help` \- Helpful to see the list of commands\.',
+                                    '`/help`    \- Helpful to see the list of commands\.',
                               parse_mode="MarkdownV2",
                               reply_markup=markup)
     return STATS
